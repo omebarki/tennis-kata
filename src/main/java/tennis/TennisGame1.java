@@ -27,7 +27,7 @@ public class TennisGame1 implements TennisGame {
         } else if (this.playerScore1.getScore() >= 4 || this.playerScore2.getScore() >= 4) {
             score = computeScoreWhenBothHaveFourPointsOrMore();
         } else {
-            score = computeScoreInTheRestCases();
+            score = computeScoreWhenLessThanFour();
         }
         return score;
     }
@@ -49,7 +49,7 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private String computeScoreInTheRestCases() {
+    private String computeScoreWhenLessThanFour() {
         String score = "";
         int tempScore = 0;
         for (int i = 1; i < 3; i++) {
