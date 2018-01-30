@@ -1,49 +1,47 @@
 package tennis;
 
 public class TennisGame1 implements TennisGame {
-    
-    private int m_score1 = 0;
-    private int m_score2 = 0;
-    private String player1Name;
-    private String player2Name;
+
+    private PlayerScore playerScore1;
+    private PlayerScore playerScore2;
 
     public TennisGame1(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+        this.playerScore1 = new PlayerScore(player1Name);
+        this.playerScore2 = new PlayerScore(player2Name);
     }
 
     public void wonPoint(String playerName) {
-        if ("player1".equals(playerName))
-            m_score1 += 1;
+        if (this.playerScore1.isNamed(playerName))
+            this.playerScore1.addPoint();
         else
-            m_score2 += 1;
+            this.playerScore2.addPoint();
     }
 
     public String getScore() {
         String score = "";
         int tempScore=0;
-        if (m_score1==m_score2)
+        if (this.playerScore1.getScore()==this.playerScore2.getScore())
         {
-            switch (m_score1)
+            switch (this.playerScore1.getScore())
             {
                 case 0:
-                        score = "Love-All";
+                    score = "Love-All";
                     break;
                 case 1:
-                        score = "Fifteen-All";
+                    score = "Fifteen-All";
                     break;
                 case 2:
-                        score = "Thirty-All";
+                    score = "Thirty-All";
                     break;
                 default:
-                        score = "Deuce";
+                    score = "Deuce";
                     break;
-                
+
             }
         }
-        else if (m_score1>=4 || m_score2>=4)
+        else if (this.playerScore1.getScore()>=4 || this.playerScore2.getScore()>=4)
         {
-            int minusResult = m_score1-m_score2;
+            int minusResult = this.playerScore1.getScore()-this.playerScore2.getScore();
             if (minusResult==1) score ="Advantage player1";
             else if (minusResult ==-1) score ="Advantage player2";
             else if (minusResult>=2) score = "Win for player1";
@@ -53,8 +51,8 @@ public class TennisGame1 implements TennisGame {
         {
             for (int i=1; i<3; i++)
             {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
+                if (i==1) tempScore = this.playerScore1.getScore();
+                else { score+="-"; tempScore = this.playerScore2.getScore();}
                 switch(tempScore)
                 {
                     case 0:
