@@ -19,33 +19,12 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score = "";
-        int tempScore = 0;
         if (this.playerScore1.getScore() == this.playerScore2.getScore()) {
             score = computeScoreWhenPlayersHaveTheSame();
         } else if (this.playerScore1.getScore() >= 4 || this.playerScore2.getScore() >= 4) {
             score = computeScoreWhenBothHaveFourPointsOrMore();
         } else {
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) tempScore = this.playerScore1.getScore();
-                else {
-                    score += "-";
-                    tempScore = this.playerScore2.getScore();
-                }
-                switch (tempScore) {
-                    case 0:
-                        score += "Love";
-                        break;
-                    case 1:
-                        score += "Fifteen";
-                        break;
-                    case 2:
-                        score += "Thirty";
-                        break;
-                    case 3:
-                        score += "Forty";
-                        break;
-                }
-            }
+            score = computeScoreInTheRestCases();
         }
         return score;
     }
@@ -76,6 +55,33 @@ public class TennisGame1 implements TennisGame {
         else if (minusResult == -1) score = "Advantage player2";
         else if (minusResult >= 2) score = "Win for player1";
         else score = "Win for player2";
+        return score;
+    }
+
+    private String computeScoreInTheRestCases(){
+        String score = "";
+        int tempScore = 0;
+        for (int i = 1; i < 3; i++) {
+            if (i == 1) tempScore = this.playerScore1.getScore();
+            else {
+                score += "-";
+                tempScore = this.playerScore2.getScore();
+            }
+            switch (tempScore) {
+                case 0:
+                    score += "Love";
+                    break;
+                case 1:
+                    score += "Fifteen";
+                    break;
+                case 2:
+                    score += "Thirty";
+                    break;
+                case 3:
+                    score += "Forty";
+                    break;
+            }
+        }
         return score;
     }
 }
