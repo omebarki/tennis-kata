@@ -6,6 +6,7 @@ public class TennisGame1 implements TennisGame {
     private PlayerScore playerScore2;
 
     private static String[] EQUAL_CASES_SCORES = {"Love-All", "Fifteen-All", "Thirty-All", "Deuce"};
+    private static String[] LESS_THAN_FOUR_SCORES_NAMES = {"Love","Fifteen", "Thirty", "Forty"};
 
     public TennisGame1(String player1Name, String player2Name) {
         this.playerScore1 = new PlayerScore(player1Name);
@@ -57,20 +58,7 @@ public class TennisGame1 implements TennisGame {
                 score += "-";
                 tempScore = this.playerScore2.getScore();
             }
-            switch (tempScore) {
-                case 0:
-                    score += "Love";
-                    break;
-                case 1:
-                    score += "Fifteen";
-                    break;
-                case 2:
-                    score += "Thirty";
-                    break;
-                case 3:
-                    score += "Forty";
-                    break;
-            }
+            score += LESS_THAN_FOUR_SCORES_NAMES[tempScore];
         }
         return score;
     }
