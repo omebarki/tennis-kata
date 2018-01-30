@@ -38,11 +38,13 @@ public class TennisGame1 implements TennisGame {
 
     private String computeScoreWhenBothHaveFourPointsOrMore() {
         String score;
-        int minusResult = this.playerScore1.getScore() - this.playerScore2.getScore();
-        if (minusResult == 1) score = "Advantage player1";
-        else if (minusResult == -1) score = "Advantage player2";
-        else if (minusResult >= 2) score = "Win for player1";
-        else score = "Win for player2";
+        int player1MinusPlayer2Score = this.playerScore1.getScore() - this.playerScore2.getScore();
+        String playerNameWithBestScore = (player1MinusPlayer2Score > 0) ? this.playerScore1.getPlayerName() : this.playerScore2.getPlayerName();
+        if (Math.abs(player1MinusPlayer2Score) == 1) {
+            score = "Advantage " + playerNameWithBestScore;
+        } else {
+            score = "Win for " + playerNameWithBestScore;
+        }
         return score;
     }
 
