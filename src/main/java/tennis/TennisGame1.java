@@ -23,11 +23,7 @@ public class TennisGame1 implements TennisGame {
         if (this.playerScore1.getScore() == this.playerScore2.getScore()) {
             score = computeScoreWhenPlayersHaveTheSame();
         } else if (this.playerScore1.getScore() >= 4 || this.playerScore2.getScore() >= 4) {
-            int minusResult = this.playerScore1.getScore() - this.playerScore2.getScore();
-            if (minusResult == 1) score = "Advantage player1";
-            else if (minusResult == -1) score = "Advantage player2";
-            else if (minusResult >= 2) score = "Win for player1";
-            else score = "Win for player2";
+            score = computeScoreWhenBothHaveFourPointsOrMore();
         } else {
             for (int i = 1; i < 3; i++) {
                 if (i == 1) tempScore = this.playerScore1.getScore();
@@ -70,6 +66,16 @@ public class TennisGame1 implements TennisGame {
                 score = "Deuce";
                 break;
         }
+        return score;
+    }
+
+    private String computeScoreWhenBothHaveFourPointsOrMore(){
+        String score;
+        int minusResult = this.playerScore1.getScore() - this.playerScore2.getScore();
+        if (minusResult == 1) score = "Advantage player1";
+        else if (minusResult == -1) score = "Advantage player2";
+        else if (minusResult >= 2) score = "Win for player1";
+        else score = "Win for player2";
         return score;
     }
 }
