@@ -50,16 +50,9 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String computeScoreWhenLessThanFour() {
-        String score = "";
-        int tempScore = 0;
-        for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = this.playerScore1.getScore();
-            else {
-                score += "-";
-                tempScore = this.playerScore2.getScore();
-            }
-            score += LESS_THAN_FOUR_SCORES_NAMES[tempScore];
-        }
+
+        String score = LESS_THAN_FOUR_SCORES_NAMES[this.playerScore1.getScore()] + "-" +
+                       LESS_THAN_FOUR_SCORES_NAMES[this.playerScore2.getScore()];
         return score;
     }
 }
