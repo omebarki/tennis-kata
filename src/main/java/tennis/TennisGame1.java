@@ -5,6 +5,8 @@ public class TennisGame1 implements TennisGame {
     private PlayerScore playerScore1;
     private PlayerScore playerScore2;
 
+    private static String[] EQUAL_CASES_SCORES = {"Love-All", "Fifteen-All", "Thirty-All", "Deuce"};
+
     public TennisGame1(String player1Name, String player2Name) {
         this.playerScore1 = new PlayerScore(player1Name);
         this.playerScore2 = new PlayerScore(player2Name);
@@ -30,25 +32,11 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String computeScoreWhenPlayersHaveTheSame() {
-        String score;
-        switch (this.playerScore1.getScore()) {
-            case 0:
-                score = "Love-All";
-                break;
-            case 1:
-                score = "Fifteen-All";
-                break;
-            case 2:
-                score = "Thirty-All";
-                break;
-            default:
-                score = "Deuce";
-                break;
-        }
-        return score;
+        int score = this.playerScore1.getScore();
+        return (score < EQUAL_CASES_SCORES.length) ? EQUAL_CASES_SCORES[score] : EQUAL_CASES_SCORES[EQUAL_CASES_SCORES.length - 1];
     }
 
-    private String computeScoreWhenBothHaveFourPointsOrMore(){
+    private String computeScoreWhenBothHaveFourPointsOrMore() {
         String score;
         int minusResult = this.playerScore1.getScore() - this.playerScore2.getScore();
         if (minusResult == 1) score = "Advantage player1";
@@ -58,7 +46,7 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private String computeScoreInTheRestCases(){
+    private String computeScoreInTheRestCases() {
         String score = "";
         int tempScore = 0;
         for (int i = 1; i < 3; i++) {
